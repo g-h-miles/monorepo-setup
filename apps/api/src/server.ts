@@ -1,21 +1,19 @@
-import { json, urlencoded } from "body-parser";
-import express, { type Express } from "express";
-import morgan from "morgan";
-import cors from "cors";
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+import { logger } from 'hono/logger';
 
-export const createServer = (): Express => {
-  const app = express();
+export const createServer = (): Hono => {
+  const app = new Hono();
+
   app
-    .disable("x-powered-by")
-    .use(morgan("dev"))
-    .use(urlencoded({ extended: true }))
-    .use(json())
-    .use(cors())
-    .get("/message/:name", (req, res) => {
-      return res.json({ message: `hello ${req.params.name}` });
+    .use('*', logger())
+    .use('*', cors())
+    .get('/message/:name', (c) => {
+      const name = c.req.param('name');
+      return c.json({ message: `hello ${name}` });
     })
-    .get("/status", (_, res) => {
-      return res.json({ ok: true });
+    .get('/status', (c) => {
+      return c.json({ ok: true });
     });
 
   return app;

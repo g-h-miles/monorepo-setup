@@ -18,7 +18,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@admin/*": ["src/*"],
+      "@repo/ui/*": ["../../packages/ui/src/*"],
+      "@repo/ui": ["../../packages/ui/src/index.ts"],
+      "@repo/logger/*": ["../../packages/logger/src/*"],
+      "@repo/logger": ["../../packages/logger/src/index.ts"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

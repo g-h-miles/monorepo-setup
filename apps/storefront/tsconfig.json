@@ -1,5 +1,7 @@
 {
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules"
+  ],
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
     "outDir": "dist",
@@ -7,7 +9,31 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@storefront/*": [
+        "src/*"
+      ],
+      "@repo/logger/*": [
+        "../../packages/logger/src/*"
+      ],
+      "@repo/logger": [
+        "../../packages/logger/src/index.ts"
+      ]
+    },
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "incremental": true
   },
-  "include": ["src", "next.config.ts", "next-env.d.ts", ".next/types/**/*.ts"]
+  "include": [
+    "src",
+    "next.config.ts",
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
+  ]
 }
