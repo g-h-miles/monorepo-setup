@@ -1,0 +1,31 @@
+{
+  "name": "admin",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite --host 0.0.0.0 --port 3001 --clearScreen false",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src/ --max-warnings 0"
+  },
+  "dependencies": {
+    "@repo/design": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "@tailwindcss/vite": "^4.0.6",
+    "react": "^19",
+    "react-dom": "^19",
+    "tailwindcss": "^4.0.6"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.19.0",
+    "typescript": "5.7.3",
+    "vite": "^5.4.14",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}

@@ -26,8 +26,6 @@
     }
   },
   "scripts": {
-    "build": "bunchee",
-    "dev": "bunchee --watch",
     "lint": "eslint src/",
     "check-types": "tsc --noEmit"
   },
@@ -45,5 +43,8 @@
         "src/*"
       ]
     }
+  },
+  "dependencies": {
+    "chalk": "^5.4.1"
   }
 }

@@ -9,6 +9,34 @@
     "dist"
   ],
   "exports": {
+    "./components/styled": {
+      "development": {
+        "types": "./src/components/styled/index.tsx",
+        "import": "./src/components/styled/index.tsx"
+      },
+      "import": {
+        "types": "./dist/es/components/styled.d.mts",
+        "default": "./dist/es/components/styled.mjs"
+      },
+      "require": {
+        "types": "./dist/cjs/components/styled.d.ts",
+        "default": "./dist/cjs/components/styled.js"
+      }
+    },
+    "./components": {
+      "development": {
+        "types": "./src/components/index.tsx",
+        "import": "./src/components/index.tsx"
+      },
+      "import": {
+        "types": "./dist/es/components.d.mts",
+        "default": "./dist/es/components.mjs"
+      },
+      "require": {
+        "types": "./dist/cjs/components.d.ts",
+        "default": "./dist/cjs/components.js"
+      }
+    },
     "./counter-button": {
       "development": {
         "types": "./src/counter-button/index.tsx",
@@ -38,25 +66,24 @@
       }
     }
   },
+  "keywords": [
+    "bun"
+  ],
   "scripts": {
-    "build": "bunchee",
-    "dev": "bunchee --watch",
-    "check-types": "tsc --noEmit",
     "lint": "eslint src/"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.12.0",
-    "bunchee": "^6.3.2",
     "eslint": "^9.19.0",
     "typescript": "5.7.3"
   },
   "peerDependencies": {
-    "@types/react": ">=18",
-    "@types/react-dom": ">=18",
-    "react": ">=18",
-    "react-dom": ">=18"
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "typesVersions": {
     "*": {
@@ -64,5 +91,13 @@
         "src/*"
       ]
     }
+  },
+  "dependencies": {
+    "@radix-ui/react-select": "^2.1.6",
+    "@repo/design": "workspace:*",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.475.0",
+    "tailwind-merge": "^3.0.1"
   }
 }
