@@ -1,10 +1,10 @@
 {
-  "name": "api",
+  "name": "hono-api",
   "version": "0.0.0",
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "bun run dist/index.js",
     "dev": "bun run src/index.ts",
     "build": "bun build src/index.ts --outdir dist",
     "check-types": "tsc --noEmit",
