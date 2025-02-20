@@ -1,0 +1,30 @@
+FROM node:18-alpine
+
+# Install pnpm
+RUN npm install -g pnpm@9.15.5
+
+WORKDIR /app
+
+# Copy root workspace files first
+COPY ../../package.json ./
+COPY ../../pnpm-lock.yaml ./
+COPY ../../pnpm-workspace.yaml ./
+
+# Copy the app's package.json
+COPY package.json ./
+
+# RUN corepack enable pnpm && pnpm i --frozen-lockfile
+
+# Install dependencies
+RUN pnpm install
+
+# Copy the rest of the source code
+COPY ../../ .
+
+# Build the app
+WORKDIR /app/apps/next
+RUN pnpm exec next build
+
+EXPOSE 3002
+
+CMD pnpm execnext start

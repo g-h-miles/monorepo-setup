@@ -1,0 +1,26 @@
+# [provider]
+# provider = "debian"
+# providers = ["debian", "bun"]
+
+
+[phases.setup]
+nixPkgs = [
+    "nodejs"
+]
+# nixpkgsArchive = 'bc7b0a89dbd830397bf834eb38d4e93f1d6a77ca'
+
+[phases.install]
+cmds = [
+    'pnpm install'
+]
+
+[phases.build]
+dependsOn = ['install']
+cmds = ['pnpm run build --filter=next']
+
+[start]
+dependsOn = ['build']
+cmd = 'pnpm run start --filter=next'
+
+[variables]
+NODE_ENV = 'production'

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  next-app:
+    image: next-docker-test-2
+    build:
+      context: .
+      dockerfile: dockerfiles/next.dockerfile
+    ports:
+      - '3002:3002'
+    environment:
+      - NODE_ENV=production
