@@ -21,12 +21,11 @@ services:
       context: .
       dockerfile: dockerfiles/vite-admin.dockerfile
       args:
-        - PORT=3000
         - BUILDPLATFORM=${BUILDPLATFORM:-linux/amd64}
         - TARGETPLATFORM=${TARGETPLATFORM:-linux/amd64}
     platform: ${TARGETPLATFORM:-linux/amd64}
     ports:
-      - '3000:3000'
+      - '3000:80'
     environment:
       - PORT=3000
     volumes:
@@ -39,12 +38,11 @@ services:
       context: .
       dockerfile: dockerfiles/astro.dockerfile
       args:
-        - PORT=3001
         - BUILDPLATFORM=${BUILDPLATFORM:-linux/amd64}
         - TARGETPLATFORM=${TARGETPLATFORM:-linux/amd64}
     platform: ${TARGETPLATFORM:-linux/amd64}
     ports:
-      - '3001:3001'
+      - '3001:80'
     environment:
       - PORT=3001
     volumes:

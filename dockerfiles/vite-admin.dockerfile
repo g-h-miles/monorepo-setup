@@ -38,17 +38,15 @@ COPY --from=pruner /app/out/full/ .
 # Build the Vite app
 RUN turbo build --filter=${PROJECT}
 
-# Debug: Check if nginx.conf exists
-RUN echo "Checking for nginx.conf:" && \
-    ls -la /app/apps/${PROJECT}/ && \
-    echo "Contents of apps/${PROJECT}:"
-
 # Final image using nginx
-FROM --platform=${TARGETPLATFORM:-linux/amd64} nginx:alpine AS runner
+FROM nginx:alpine AS runner
 ARG PROJECT=vite-admin
 
 # Remove default nginx config
 RUN rm -rf /etc/nginx/conf.d/* /etc/nginx/nginx.conf
+
+# Copy the nginx configuration
+COPY apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy only the built files
 COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html/
@@ -57,8 +55,8 @@ ARG PORT=3000
 ENV PORT=${PORT}
 EXPOSE ${PORT}
 
-# Install wget for health check
-RUN apk add --no-cache wget
+# Install wget and envsubst
+RUN apk add --no-cache wget gettext
 
 # Add health check
 HEALTHCHECK --interval=30s --timeout=3s \

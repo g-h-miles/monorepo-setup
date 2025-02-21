@@ -53,6 +53,9 @@ ARG PROJECT=astro
 # Remove default nginx config
 RUN rm -rf /etc/nginx/conf.d/* /etc/nginx/nginx.conf
 
+# Copy the nginx configuration
+COPY apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copy only the built files
 COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html/
 
