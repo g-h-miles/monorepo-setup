@@ -33,7 +33,7 @@ RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm install --frozen-lockfi
 COPY --from=pruner /app/out/full/ .
 
 # Add debug before build
-RUN echo "Contents before build:" && ls -la apps/vite-admin/
+RUN echo "Contents before build:" && ls -la apps/${PROJECT}/
 RUN echo "\nturbo.json contents:" && cat turbo.json
 
 # Build the app
