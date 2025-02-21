@@ -93,6 +93,9 @@ importers:
       '@repo/logger':
         specifier: workspace:*
         version: link:../../packages/logger
+      bun:
+        specifier: ^1.2.2
+        version: 1.2.2
       hono:
         specifier: ^4.6.20
         version: 4.6.20

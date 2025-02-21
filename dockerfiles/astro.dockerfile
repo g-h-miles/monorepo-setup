@@ -12,7 +12,7 @@ RUN pnpm config set store-dir ~/.pnpm-store
 
 # Prune projects
 FROM base AS pruner
-ARG PROJECT=next
+ARG PROJECT=astro
 
 WORKDIR /app
 COPY . .
@@ -20,7 +20,7 @@ RUN turbo prune --scope=${PROJECT} --docker
 
 # Build the project
 FROM base AS builder
-ARG PROJECT=next
+ARG PROJECT=astro
 
 WORKDIR /app
 
@@ -29,39 +29,31 @@ COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=pruner /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
 COPY --from=pruner /app/out/json/ .
 
-# First install the dependencies (as they change less often)
+# First install dependencies
 RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm install --frozen-lockfile
 
 # Copy source code of isolated subworkspace
 COPY --from=pruner /app/out/full/ .
 
+# Build the Astro app
 RUN turbo build --filter=${PROJECT}
-RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm prune --prod --no-optional
-RUN rm -rf ./**/*/src
-# Add debug command to see what files we have after build
+RUN ls -la /app/apps/${PROJECT}/dist
+RUN ls -la /app/apps/${PROJECT}/dist/_astro || echo "No _astro directory"
 
-
-# Final image
+# Final image using nginx
 FROM --platform=${TARGETPLATFORM:-linux/amd64} node:${NODE_VERSION}-alpine AS runner
-ARG PROJECT=next
+ARG PROJECT=astro
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nodejs
-USER nodejs
+# Copy the entire dist directory structure
+COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html
 
-WORKDIR /app
+# Copy custom nginx config
+COPY --from=builder /app/apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy standalone directory and its contents
-COPY --from=builder --chown=nodejs:nodejs /app/apps/next/.next/standalone/. ./
-COPY --from=builder --chown=nodejs:nodejs /app/apps/next/.next/static ./apps/next/.next/static
-COPY --from=builder --chown=nodejs:nodejs /app/apps/next/public ./apps/next/public
-
-ARG PORT=3002
+ARG PORT=3001
 ENV PORT=${PORT}
-ENV NODE_ENV=production
-ENV HOSTNAME=0.0.0.0
+
 EXPOSE ${PORT}
 
-
-# Add debugging commands
-CMD ["node", "apps/next/server.js"]
+# Use shell form to interpolate PORT env var
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'

@@ -2,11 +2,11 @@ import { log } from '@repo/logger'
 
 import { createServer } from './server'
 
-const port = 5001 // TODO: make this dynamic
+const port = parseInt(process.env.PORT || '3003', 10)
 const server = createServer()
 log(`api running on ${port}`)
 
 export default {
-  port: port,
+  port,
   fetch: server.fetch,
 }
