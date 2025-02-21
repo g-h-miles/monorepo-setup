@@ -45,16 +45,27 @@ ARG PROJECT=vite-admin
 # Copy the built assets to nginx serve directory
 COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html
 
-# Copy custom nginx config
-COPY --from=builder /app/apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf
+# Try to copy existing nginx.conf, create default if it fails
+RUN if [ -f /app/apps/${PROJECT}/nginx.conf ]; then \
+    cp /app/apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf.template; \
+    else \
+    echo 'server { \n\
+    listen ${PORT:-3000}; \n\
+    server_name _; \n\
+    root /usr/share/nginx/html; \n\
+    index index.html; \n\
+    location / { \n\
+        try_files $uri $uri/ /index.html; \n\
+    } \n\
+}' > /etc/nginx/conf.d/default.conf.template; \
+    fi
 
 ARG PORT=3000
 ENV PORT=${PORT}
-
 EXPOSE ${PORT}
 
-# Use shell form to interpolate PORT env var
-CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+# Configure nginx to use environment variables and start
+CMD sh -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
 # Add health check
 HEALTHCHECK --interval=30s --timeout=3s \

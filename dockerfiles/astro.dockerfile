@@ -47,23 +47,28 @@ ARG PROJECT=astro
 # Copy the built files
 COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html
 
-# Add a basic nginx config if one doesn't exist
-COPY --from=builder /app/apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf || \
-COPY <<EOF /etc/nginx/conf.d/default.conf
-server {
-    listen ${PORT:-3001};
-    server_name _;
-    root /usr/share/nginx/html;
-    index index.html;
-    location / {
-        try_files \$uri \$uri/ /index.html;
-    }
-}
-EOF
+# Try to copy existing nginx.conf, create default if it fails
+RUN if [ -f /app/apps/${PROJECT}/nginx.conf ]; then \
+    cp /app/apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf.template; \
+    else \
+    echo 'server { \n\
+    listen ${PORT:-3001}; \n\
+    server_name _; \n\
+    root /usr/share/nginx/html; \n\
+    index index.html; \n\
+    location / { \n\
+        try_files $uri $uri/ /index.html; \n\
+    } \n\
+}' > /etc/nginx/conf.d/default.conf.template; \
+    fi
 
 ARG PORT=3001
 ENV PORT=${PORT}
 EXPOSE ${PORT}
 
-# Configure nginx to use environment variables
-CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+# Configure nginx to use environment variables and start
+CMD sh -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD wget --quiet --tries=1 --spider http://localhost:${PORT:-3001} || exit 1
