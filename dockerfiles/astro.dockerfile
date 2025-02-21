@@ -41,19 +41,29 @@ RUN ls -la /app/apps/${PROJECT}/dist
 RUN ls -la /app/apps/${PROJECT}/dist/_astro || echo "No _astro directory"
 
 # Final image using nginx
-FROM --platform=${TARGETPLATFORM:-linux/amd64} node:${NODE_VERSION}-alpine AS runner
+FROM --platform=${TARGETPLATFORM:-linux/amd64} nginx:alpine AS runner
 ARG PROJECT=astro
 
-# Copy the entire dist directory structure
+# Copy the built files
 COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html
 
-# Copy custom nginx config
-COPY --from=builder /app/apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf
+# Add a basic nginx config if one doesn't exist
+COPY --from=builder /app/apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf || \
+COPY <<EOF /etc/nginx/conf.d/default.conf
+server {
+    listen ${PORT:-3001};
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+    location / {
+        try_files \$uri \$uri/ /index.html;
+    }
+}
+EOF
 
 ARG PORT=3001
 ENV PORT=${PORT}
-
 EXPOSE ${PORT}
 
-# Use shell form to interpolate PORT env var
+# Configure nginx to use environment variables
 CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'

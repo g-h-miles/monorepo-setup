@@ -39,7 +39,7 @@ COPY --from=pruner /app/out/full/ .
 RUN turbo build --filter=${PROJECT}
 
 # Final image using nginx
-FROM nginx:alpine AS runner
+FROM --platform=${TARGETPLATFORM:-linux/amd64} nginx:alpine AS runner
 ARG PROJECT=vite-admin
 
 # Copy the built assets to nginx serve directory
@@ -55,3 +55,7 @@ EXPOSE ${PORT}
 
 # Use shell form to interpolate PORT env var
 CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD wget --quiet --tries=1 --spider http://localhost:${PORT:-3000} || exit 1
