@@ -37,6 +37,12 @@ COPY --from=pruner /app/out/full/ .
 
 # Build the Astro app
 RUN turbo build --filter=${PROJECT}
+
+# Debug: Check if nginx.conf exists
+RUN echo "Checking for nginx.conf:" && \
+    ls -la /app/apps/${PROJECT}/ && \
+    echo "Contents of apps/${PROJECT}:"
+
 RUN ls -la /app/apps/${PROJECT}/dist
 RUN ls -la /app/apps/${PROJECT}/dist/_astro || echo "No _astro directory"
 
@@ -44,30 +50,19 @@ RUN ls -la /app/apps/${PROJECT}/dist/_astro || echo "No _astro directory"
 FROM --platform=${TARGETPLATFORM:-linux/amd64} nginx:alpine AS runner
 ARG PROJECT=astro
 
-# Copy the built files
-COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html
-
-# Try to copy existing nginx.conf, create default if it fails
-RUN if [ -f /app/apps/${PROJECT}/nginx.conf ]; then \
-    cp /app/apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf.template; \
-    else \
-    echo 'server { \n\
-    listen ${PORT:-3001}; \n\
-    server_name _; \n\
-    root /usr/share/nginx/html; \n\
-    index index.html; \n\
-    location / { \n\
-        try_files $uri $uri/ /index.html; \n\
-    } \n\
-}' > /etc/nginx/conf.d/default.conf.template; \
-    fi
+# Copy the built files and nginx config
+COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html/
+COPY --from=builder /app/apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf
 
 ARG PORT=3001
 ENV PORT=${PORT}
 EXPOSE ${PORT}
 
-# Configure nginx to use environment variables and start
-CMD sh -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+# Install wget for health check
+RUN apk add --no-cache wget
+
+# Configure nginx
+CMD ["nginx", "-g", "daemon off;"]
 
 # Add health check
 HEALTHCHECK --interval=30s --timeout=3s \
