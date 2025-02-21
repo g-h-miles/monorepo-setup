@@ -38,7 +38,23 @@ RUN echo "\nturbo.json contents:" && cat turbo.json
 
 # Build the app
 WORKDIR /app
-RUN turbo build --filter=${PROJECT}
+RUN echo "=== BEFORE BUILD ===" && \
+    pwd && \
+    ls -la && \
+    ls -la apps/vite-admin/
+
+RUN pnpm --filter ${PROJECT} build
+
+RUN echo "=== AFTER BUILD ===" && \
+    pwd && \
+    ls -la && \
+    ls -la apps/vite-admin/ && \
+    echo "=== DIST CONTENTS ===" && \
+    find /app -name "dist" -type d -exec sh -c 'echo "\nContents of {}:" && ls -la {}' \;
+
+# Debug: List all dist directories
+RUN find /app -name "dist" -type d
+RUN ls -la /app/apps/vite-admin/
 
 # Return to app root
 WORKDIR /app
@@ -56,8 +72,8 @@ USER nodejs
 WORKDIR /app
 
 # Copy only the built files and dependencies
-COPY --from=builder --chown=nodejs:nodejs /app/apps/${PROJECT}/dist ./dist
-COPY --from=builder --chown=nodejs:nodejs /app/apps/${PROJECT}/package.json ./package.json
+COPY --from=builder --chown=nodejs:nodejs /app/apps/vite-admin/dist ./dist
+COPY --from=builder --chown=nodejs:nodejs /app/apps/vite-admin/package.json ./package.json
 
 ARG PORT=3000
 ENV PORT=${PORT}
