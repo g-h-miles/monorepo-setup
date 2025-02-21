@@ -46,7 +46,7 @@ ARG PROJECT=vite-admin
 RUN rm -rf /etc/nginx/conf.d/* /etc/nginx/nginx.conf
 
 # Copy the nginx configuration
-COPY apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf
+COPY apps/${PROJECT}/nginx.conf /etc/nginx/nginx.conf
 
 # Copy only the built files
 COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html/
