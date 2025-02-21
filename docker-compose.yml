@@ -22,10 +22,16 @@ services:
       dockerfile: dockerfiles/vite-admin.dockerfile
       args:
         - PORT=3000
+        - BUILDPLATFORM=${BUILDPLATFORM:-linux/amd64}
+        - TARGETPLATFORM=${TARGETPLATFORM:-linux/amd64}
+    platform: ${TARGETPLATFORM:-linux/amd64}
     ports:
       - '3000:3000'
     environment:
       - PORT=3000
+    volumes:
+      - './apps/vite-admin/nginx.conf:/etc/nginx/nginx.conf:ro'
+    restart: always
 
   astro:
     image: astro-docker-test-2
@@ -41,6 +47,9 @@ services:
       - '3001:3001'
     environment:
       - PORT=3001
+    volumes:
+      - './apps/astro/nginx.conf:/etc/nginx/nginx.conf:ro'
+    restart: always
 
   hono-api:
     image: hono-api-docker-test-2

@@ -50,9 +50,11 @@ RUN ls -la /app/apps/${PROJECT}/dist/_astro || echo "No _astro directory"
 FROM --platform=${TARGETPLATFORM:-linux/amd64} nginx:alpine AS runner
 ARG PROJECT=astro
 
-# Copy the built files and nginx config
+# Remove default nginx config
+RUN rm -rf /etc/nginx/conf.d/* /etc/nginx/nginx.conf
+
+# Copy only the built files
 COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html/
-COPY --from=builder /app/apps/${PROJECT}/nginx.conf /etc/nginx/conf.d/default.conf
 
 ARG PORT=3001
 ENV PORT=${PORT}
@@ -61,9 +63,8 @@ EXPOSE ${PORT}
 # Install wget for health check
 RUN apk add --no-cache wget
 
-# Configure nginx
-CMD ["nginx", "-g", "daemon off;"]
-
 # Add health check
 HEALTHCHECK --interval=30s --timeout=3s \
   CMD wget --quiet --tries=1 --spider http://localhost:${PORT:-3001} || exit 1
+
+CMD ["nginx", "-g", "daemon off;"]
