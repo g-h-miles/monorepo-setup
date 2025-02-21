@@ -4,15 +4,20 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && cp serve.ts dist/",
+    "build:bun": "bunx --bun vite build && bun build serve.ts --outdir dist --target bun",
     "dev": "vite --host 0.0.0.0 --port 3001 --clearScreen false",
+    "dev:bun": "bunx --bun vite",
     "check-types": "tsc --noEmit",
-    "lint": "eslint src/ --max-warnings 0"
+    "lint": "eslint src/ --max-warnings 0",
+    "preview": "vite preview",
+    "start": "bun dist/serve.js"
   },
   "dependencies": {
     "@repo/design": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tailwindcss/vite": "^4.0.6",
+    "bun": "^1.2.2",
     "react": "^19",
     "react-dom": "^19",
     "tailwindcss": "^4.0.6"
@@ -20,6 +25,7 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@types/bun": "^1.2.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
