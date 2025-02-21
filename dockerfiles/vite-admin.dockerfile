@@ -56,8 +56,8 @@ USER nodejs
 WORKDIR /app
 
 # Copy only the built files and dependencies
-COPY --from=builder --chown=nodejs:nodejs /app/apps/vite-admin/dist ./dist
-COPY --from=builder --chown=nodejs:nodejs /app/apps/vite-admin/package.json ./package.json
+COPY --from=builder --chown=nodejs:nodejs /app/apps/${PROJECT}/dist ./dist
+COPY --from=builder --chown=nodejs:nodejs /app/apps/${PROJECT}/package.json ./package.json
 
 ARG PORT=3000
 ENV PORT=${PORT}

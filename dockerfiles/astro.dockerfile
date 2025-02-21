@@ -1,17 +1,14 @@
-ARG NODE_VERSION=18.18.0
-
-# Alpine image
-FROM --platform=${BUILDPLATFORM:-linux/amd64} node:${NODE_VERSION}-alpine AS alpine
+# Base image with Bun - use platform-specific image
+FROM --platform=${BUILDPLATFORM:-linux/amd64} oven/bun:canary-alpine AS alpine
 RUN apk update
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat tree nodejs npm
 
-# Setup pnpm and turbo on the alpine base
-FROM alpine as base
+# Setup pnpm and turbo
 RUN npm install pnpm turbo --global
 RUN pnpm config set store-dir ~/.pnpm-store
 
 # Prune projects
-FROM base AS pruner
+FROM alpine AS pruner
 ARG PROJECT=astro
 
 WORKDIR /app
@@ -19,7 +16,7 @@ COPY . .
 RUN turbo prune --scope=${PROJECT} --docker
 
 # Build the project
-FROM base AS builder
+FROM alpine AS builder
 ARG PROJECT=astro
 
 WORKDIR /app
@@ -29,45 +26,44 @@ COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=pruner /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
 COPY --from=pruner /app/out/json/ .
 
-# First install dependencies
+# First install the dependencies (as they change less often)
 RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm install --frozen-lockfile
 
 # Copy source code of isolated subworkspace
 COPY --from=pruner /app/out/full/ .
 
-# Build the Astro app
+# Add debug before build
+RUN echo "Contents before build:" && ls -la apps/vite-admin/
+RUN echo "\nturbo.json contents:" && cat turbo.json
+
+# Build the app
+WORKDIR /app
 RUN turbo build --filter=${PROJECT}
 
-# Debug: Check if nginx.conf exists
-RUN echo "Checking for nginx.conf:" && \
-    ls -la /app/apps/${PROJECT}/ && \
-    echo "Contents of apps/${PROJECT}:"
+# Return to app root
+WORKDIR /app
 
-RUN ls -la /app/apps/${PROJECT}/dist
-RUN ls -la /app/apps/${PROJECT}/dist/_astro || echo "No _astro directory"
+RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm prune --prod --no-optional
 
-# Final image using nginx
-FROM --platform=${TARGETPLATFORM:-linux/amd64} nginx:alpine AS runner
+# Final image - use platform-specific image
+FROM --platform=${TARGETPLATFORM:-linux/amd64} oven/bun:canary-alpine AS runner
 ARG PROJECT=astro
 
-# Remove default nginx config
-RUN rm -rf /etc/nginx/conf.d/* /etc/nginx/nginx.conf
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nodejs
+USER nodejs
 
-# Copy the nginx configuration
-COPY apps/${PROJECT}/nginx.conf /etc/nginx/nginx.conf
+WORKDIR /app
 
-# Copy only the built files
-COPY --from=builder /app/apps/${PROJECT}/dist /usr/share/nginx/html/
+# Copy only the built files and dependencies
+COPY --from=builder --chown=nodejs:nodejs /app/apps/${PROJECT}/dist ./dist
+COPY --from=builder --chown=nodejs:nodejs /app/apps/${PROJECT}/package.json ./package.json
 
 ARG PORT=3001
 ENV PORT=${PORT}
+ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
 EXPOSE ${PORT}
 
-# Install wget for health check
-RUN apk add --no-cache wget
-
-# Add health check
-HEALTHCHECK --interval=30s --timeout=3s \
-  CMD wget --quiet --tries=1 --spider http://localhost:${PORT:-3001} || exit 1
-
-CMD ["nginx", "-g", "daemon off;"]
+# Start the server
+CMD ["bun", "dist/serve.js"]
