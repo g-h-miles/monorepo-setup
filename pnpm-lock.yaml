@@ -97,6 +97,9 @@ importers:
 
   apps/hono-api:
     dependencies:
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@repo/logger':
         specifier: workspace:*
         version: link:../../packages/logger
@@ -274,6 +277,31 @@ importers:
         version: 8.23.0(eslint@9.20.0(jiti@2.4.2))(typescript@5.7.3)
 
   packages/config-typescript: {}
+
+  packages/db:
+    dependencies:
+      bun:
+        specifier: ^1.2.2
+        version: 1.2.2
+    devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../config-eslint
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../config-typescript
+      '@types/bun':
+        specifier: ^1.2.2
+        version: 1.2.2
+      eslint:
+        specifier: ^9.20.0
+        version: 9.20.0(jiti@2.4.2)
+      tsup:
+        specifier: ^8.0.1
+        version: 8.3.6(@swc/core@1.10.14(@swc/helpers@0.5.15))(jiti@2.4.2)(postcss@8.5.2)(typescript@5.7.3)
+      typescript:
+        specifier: ^5.7.3
+        version: 5.7.3
 
   packages/design:
     dependencies:
@@ -1991,7 +2019,6 @@ packages:
 
   bun@1.2.2:
     resolution: {integrity: sha512-RUc8uVVTw8WoASUzXaEQJR1s7mnwoHm3P871qBUIqSaoOpuwcU+bSVX151/xoqDwnyv38SjOX7yQ3oO0IeT73g==}
-    cpu: [arm64, x64, aarch64]
     os: [darwin, linux, win32]
     hasBin: true
 

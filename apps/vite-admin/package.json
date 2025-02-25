@@ -7,7 +7,7 @@
     "build": "vite build && cp serve.ts dist/",
     "build:bun": "bunx --bun vite build && bun build serve.ts --outdir dist --target bun",
     "dev": "vite --host 0.0.0.0 --port 3001 --clearScreen false",
-    "dev:bun": "bunx --bun vite",
+    "dev:bun": "bunx --bun vite --host 0.0.0.0 --port 3001 --clearScreen false",
     "check-types": "tsc --noEmit",
     "lint": "eslint src/ --max-warnings 0",
     "preview": "vite preview",

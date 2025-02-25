@@ -1,3 +1,4 @@
+import { test_result } from '@repo/db'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
@@ -14,6 +15,10 @@ export const createServer = (): Hono => {
     })
     .get('/status', (c) => {
       return c.json({ ok: true })
+    })
+    .get('/test', async (c) => {
+      const result = await test_result()
+      return c.json(result)
     })
 
   return app

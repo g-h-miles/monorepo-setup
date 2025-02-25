@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@repo/logger": "workspace:*",
+    "@repo/db": "workspace:*",
     "bun": "^1.2.2",
     "hono": "^4.6.20"
   },

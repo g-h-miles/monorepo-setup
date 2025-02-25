@@ -1,0 +1,52 @@
+{
+  "name": "@repo/db",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/es/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./dist/es/index.d.ts",
+  "exports": {
+    ".": {
+      "development": {
+        "types": "./src/index.ts",
+        "import": "./src/index.ts"
+      },
+      "import": {
+        "types": "./dist/es/index.d.ts",
+        "default": "./dist/es/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.cts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint src/",
+    "check-types": "tsc --noEmit",
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/bun": "^1.2.2",
+    "eslint": "^9.19.0",
+    "tsup": "^8.0.1",
+    "typescript": "5.7.3"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*"
+      ]
+    }
+  },
+  "dependencies": {
+    "bun": "^1.2.2"
+  }
+}

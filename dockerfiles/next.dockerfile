@@ -1,17 +1,14 @@
-ARG NODE_VERSION=18.18.0
-
-# Alpine image
-FROM --platform=${BUILDPLATFORM:-linux/amd64} node:${NODE_VERSION}-alpine AS alpine
+# Base image with Bun - use platform-specific image
+FROM --platform=${BUILDPLATFORM:-linux/amd64} oven/bun:canary-alpine AS alpine
 RUN apk update
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat tree nodejs npm
 
-# Setup pnpm and turbo on the alpine base
-FROM alpine as base
+# Setup pnpm and turbo
 RUN npm install pnpm turbo --global
 RUN pnpm config set store-dir ~/.pnpm-store
 
 # Prune projects
-FROM base AS pruner
+FROM alpine AS pruner
 ARG PROJECT=next
 
 WORKDIR /app
@@ -19,7 +16,7 @@ COPY . .
 RUN turbo prune --scope=${PROJECT} --docker
 
 # Build the project
-FROM base AS builder
+FROM alpine AS builder
 ARG PROJECT=next
 
 WORKDIR /app
@@ -41,8 +38,8 @@ RUN rm -rf ./**/*/src
 # Add debug command to see what files we have after build
 
 
-# Final image
-FROM --platform=${TARGETPLATFORM:-linux/amd64} node:${NODE_VERSION}-alpine AS runner
+# Final image - use platform-specific image
+FROM --platform=${TARGETPLATFORM:-linux/amd64} oven/bun:canary-alpine AS runner
 ARG PROJECT=next
 
 RUN addgroup --system --gid 1001 nodejs
@@ -64,4 +61,4 @@ EXPOSE ${PORT}
 
 
 # Add debugging commands
-CMD ["node", "apps/next/server.js"]
+CMD ["bun", "apps/next/server.js"]

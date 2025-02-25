@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "dev:bun": "bun run serve.ts",
     "build": "astro build && cp serve.ts dist/",
     "build:bun": "bunx --bun astro build && bun build serve.ts --outdir dist --target bun",
     "preview": "astro preview",

@@ -7,7 +7,9 @@
     "paths": {
       "@api/*": ["src/*"],
       "@repo/logger/*": ["../../packages/logger/src/*"],
-      "@repo/logger": ["../../packages/logger/src/index.ts"]
+      "@repo/logger": ["../../packages/logger/src/index.ts"],
+      "@repo/db/*": ["../../packages/db/src/*"],
+      "@repo/db": ["../../packages/db/src/index.ts"]
     }
   },
   "exclude": ["node_modules"],

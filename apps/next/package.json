@@ -5,10 +5,10 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev -p 3002",
+    "dev": "bun --bun run next dev -p 3002",
     "lint": "next lint",
     "check-types": "tsc --noEmit",
-    "start": "next start"
+    "start": "bun --bun run next start"
   },
   "dependencies": {
     "@repo/design": "workspace:*",
