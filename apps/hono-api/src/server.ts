@@ -20,6 +20,10 @@ export const createServer = (): Hono => {
       const result = await test_result()
       return c.json(result)
     })
+    .get('/env', async (c) => {
+      const result = JSON.stringify(process.env)
+      return c.json(result)
+    })
 
   return app
 }
