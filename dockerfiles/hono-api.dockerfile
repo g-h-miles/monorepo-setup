@@ -40,7 +40,7 @@ RUN echo "\nturbo.json contents:" && cat turbo.json
 
 # Run build directly with bun
 WORKDIR /app/apps/hono-api
-RUN bun build src/index.ts --outdir dist
+RUN bun build src/index.ts --outdir dist --target=bun
 
 # Return to app root
 WORKDIR /app
