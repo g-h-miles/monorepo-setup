@@ -10,5 +10,8 @@ export default defineConfig({
       }),
       tailwindcss(),
     ],
+    define: {
+      process: {},
+    },
   },
 })

@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bunx --bun vinxi dev --port 3004",
+    "dev": "bunx --bun vinxi dev --port 3004 --preset=bun",
     "build": "bunx --bun vinxi build --preset=bun",
     "start": "bunx --bun vinxi start --port 3004"
   },

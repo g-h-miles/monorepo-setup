@@ -14,11 +14,16 @@ import { seo } from '~/utils/seo'
 
 export const Route = createRootRoute({
   loader: async () => {
-    if (typeof Bun !== 'undefined') {
-      console.log('Bun is running')
-      // this code will only run when the file is run with Bun
-    } else {
-      console.log('Node is running')
+    try {
+      const isBun =
+        typeof Bun !== 'undefined' ||
+        (typeof process !== 'undefined' &&
+          process.versions &&
+          'bun' in process.versions)
+
+      console.log(isBun ? 'Bun is running' : 'Node is running')
+    } catch (error) {
+      console.log('Unable to determine runtime environment')
     }
   },
   head: () => ({
