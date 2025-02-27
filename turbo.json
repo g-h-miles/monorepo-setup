@@ -11,7 +11,8 @@
         ".vercel/**",
         "dist/**",
         ".next/**",
-        "!.next/cache/**"
+        "!.next/cache/**",
+        ".output/**"
       ]
     },
     "test": {
