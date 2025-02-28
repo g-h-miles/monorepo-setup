@@ -1,8 +1,8 @@
 import './styles.css'
 
-import { SelectDemo } from '@repo/ui/components/styled'
-import { CounterButton } from '@repo/ui/counter-button'
-import { Link } from '@repo/ui/link'
+import { SelectDemo } from '@repo_name/ui/components/styled'
+import { CounterButton } from '@repo_name/ui/counter-button'
+import { Link } from '@repo_name/ui/link'
 
 function App() {
   return (

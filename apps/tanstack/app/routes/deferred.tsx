@@ -1,6 +1,6 @@
+import { Suspense, useState } from 'react'
 import { Await, createFileRoute } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
-import { Suspense, useState } from 'react'
 
 const personServerFn = createServerFn({ method: 'GET' })
   .validator((d: string) => d)
@@ -19,7 +19,7 @@ export const Route = createFileRoute('/deferred')({
   loader: async () => {
     return {
       deferredStuff: new Promise<string>((r) =>
-        setTimeout(() => r('Hello deferred!'), 2000),
+        setTimeout(() => r('Hello deferred!'), 2000)
       ),
       deferredPerson: slowServerFn({ data: 'Tanner Linsley' }),
       person: await personServerFn({ data: 'John Doe' }),

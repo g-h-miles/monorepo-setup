@@ -1,6 +1,6 @@
 'use client'
 
-import { SelectDemo } from '@repo/ui/components/styled'
+import { SelectDemo } from '@repo_name/ui/components/styled'
 
 export default function TestPage() {
   return (

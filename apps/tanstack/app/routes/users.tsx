@@ -1,5 +1,6 @@
-import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
 import axios from 'redaxios'
+
 import { DEPLOY_URL } from '../utils/users'
 import type { User } from '../utils/users'
 
@@ -19,7 +20,7 @@ function UsersComponent() {
   const users = Route.useLoaderData()
 
   return (
-    <div className="p-2 flex gap-2">
+    <div className="flex gap-2 p-2">
       <ul className="list-disc pl-4">
         {[
           ...users,

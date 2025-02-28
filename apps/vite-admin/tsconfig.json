@@ -1,18 +1,22 @@
 {
-  "extends": "@repo/typescript-config/vite.json",
+  "extends": "@repo_name/typescript-config/vite.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@admin/*": ["src/*"],
-      "@repo/ui/*": ["../../packages/ui/src/*"],
-      "@repo/ui": ["../../packages/ui/src/index.ts"],
+      "@repo_name/ui/*": ["../../packages/ui/src/*"],
+      "@repo_name/ui": ["../../packages/ui/src/index.ts"],
       "@ui/*": ["../../packages/ui/src/*"],
-      "@repo/logger/*": ["../../packages/logger/src/*"],
-      "@repo/logger": ["../../packages/logger/src/index.ts"],
-      "@repo/db/*": ["../../packages/db/src/*"],
-      "@repo/db": ["../../packages/db/src/index.ts"]
+      "@repo_name/logger/*": ["../../packages/logger/src/*"],
+      "@repo_name/logger": ["../../packages/logger/src/index.ts"],
+      "@repo_name/db/*": ["../../packages/db/src/*"],
+      "@repo_name/db": ["../../packages/db/src/index.ts"]
     }
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

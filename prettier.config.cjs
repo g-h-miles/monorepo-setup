@@ -5,36 +5,37 @@
  * @type {import("prettier").Config}
  */
 module.exports = {
-  trailingComma: "es5",
+  trailingComma: 'es5',
   tabWidth: 2,
   semi: false,
   singleQuote: true,
-  endOfLine: "lf",
+  endOfLine: 'lf',
   importOrder: [
-    "^(react/(.*)$)|^(react$)",
-    "^(next/(.*)$)|^(next$)",
-    "<THIRD_PARTY_MODULES>",
-    "",
-    "^@workspace/(.*)$",
-    "",
-    "^types$",
-    "^@/types/(.*)$",
-    "^@/config/(.*)$",
-    "^@/lib/(.*)$",
-    "^@/hooks/(.*)$",
-    "^@/components/ui/(.*)$",
-    "^@/components/(.*)$",
-    "^@/registry/(.*)$",
-    "^@/styles/(.*)$",
-    "^@/app/(.*)$",
-    "^@/www/(.*)$",
-    "",
-    "^[./]"
+    '^(react/(.*)$)|^(react$)',
+    '^(next/(.*)$)|^(next$)',
+    '<THIRD_PARTY_MODULES>',
+    '',
+    '^@workspace/(.*)$',
+    '',
+    '^types$',
+    '^@/types/(.*)$',
+    '^@/config/(.*)$',
+    '^@/lib/(.*)$',
+    '^@/hooks/(.*)$',
+    '^@/components/ui/(.*)$',
+    '^@/components/(.*)$',
+    '^@/registry/(.*)$',
+    '^@/styles/(.*)$',
+    '^@/app/(.*)$',
+    '^@/www/(.*)$',
+    '',
+    '^[./]',
   ],
 
-  importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
+  importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
   plugins: [
-    "@ianvs/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss"
-  ]
-};
+    '@ianvs/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss',
+    'prettier-plugin-packagejson',
+  ],
+}

@@ -1,11 +1,12 @@
-import js from "@eslint/js";
-import eslintConfigPrettier from "eslint-config-prettier";
-import tseslint from "typescript-eslint";
+import js from '@eslint/js'
+import eslintConfigPrettier from 'eslint-config-prettier'
+import pluginReact from 'eslint-plugin-react'
+import pluginSvelte from 'eslint-plugin-svelte'
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
 import ts from 'typescript-eslint'
-import pluginReact from "eslint-plugin-react";
-import globals from "globals";
-import pluginSvelte from "eslint-plugin-svelte";
-import { config as baseConfig } from "./index.js";
+
+import { config as baseConfig } from './index.js'
 
 /**
  * A custom ESLint configuration for libraries that use Next.js.
@@ -17,7 +18,7 @@ export const config = [
   js.configs.recommended,
   eslintConfigPrettier,
   ...tseslint.configs.recommended,
-  ...pluginSvelte.configs["flat/recommended"],
+  ...pluginSvelte.configs['flat/recommended'],
   {
     ...pluginReact.configs.flat.recommended,
     languageOptions: {
@@ -28,14 +29,14 @@ export const config = [
     },
   },
   {
-    ignores: [".svelte-kit/**/*"]
+    ignores: ['.svelte-kit/**/*'],
   },
   {
-    files: ["**/*.svelte"],
+    files: ['**/*.svelte'],
     languageOptions: {
       parserOptions: {
-        parser: ts.parser
-      }
-    }
-  }
-];
+        parser: ts.parser,
+      },
+    },
+  },
+]

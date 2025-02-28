@@ -1,10 +1,10 @@
 import { execSync } from 'child_process'
-import { appendFileSync, readFileSync, writeFileSync } from 'fs'
+import { appendFileSync, readFileSync } from 'fs'
 import { glob } from 'glob'
 
 // Initialize output file with tree structure
 console.log('Generating project information...')
-execSync('tree -L 5 -I "node_modules" > project-info.txt')
+execSync('tree -L 5 -I "node_modules" > ../project-info.txt')
 
 // Function to append package.json content to file
 function appendPackageJson(path: string) {
@@ -18,10 +18,10 @@ function appendPackageJson(path: string) {
 }
 
 // Append root package.json
-appendPackageJson('package.json')
+appendPackageJson('../package.json')
 
 // Append all package.json files in apps directory
-const appPackageJsons = glob.sync('apps/*/package.json')
+const appPackageJsons = glob.sync('../apps/*/package.json')
 appPackageJsons.forEach(appendPackageJson)
 
 console.log('Project information has been written to project-info.txt')

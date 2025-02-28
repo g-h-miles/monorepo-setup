@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      prettier-plugin-tailwindcss:
-        specifier: ^0.6.11
-        version: 0.6.11(@ianvs/prettier-plugin-sort-imports@4.4.1(prettier@3.5.2))(prettier@3.5.2)
     devDependencies:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.4.1
@@ -25,8 +21,14 @@ importers:
         specifier: ^11.0.1
         version: 11.0.1
       prettier:
-        specifier: ^3.4.2
+        specifier: ^3.5.2
         version: 3.5.2
+      prettier-plugin-packagejson:
+        specifier: ^2.5.8
+        version: 2.5.8(prettier@3.5.2)
+      prettier-plugin-tailwindcss:
+        specifier: ^0.6.11
+        version: 0.6.11(@ianvs/prettier-plugin-sort-imports@4.4.1(prettier@3.5.2))(prettier@3.5.2)
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -45,21 +47,15 @@ importers:
       '@astrojs/react':
         specifier: ^4.2.0
         version: 4.2.0(@types/node@22.13.5)(@types/react-dom@19.0.4(@types/react@19.0.10))(@types/react@19.0.10)(jiti@2.4.2)(lightningcss@1.29.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)
-      '@repo/design':
+      '@repo_name/design':
         specifier: workspace:*
         version: link:../../packages/design
-      '@repo/ui':
+      '@repo_name/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@tailwindcss/vite':
-        specifier: ^4.0.7
+        specifier: ^4.0.9
         version: 4.0.9(vite@6.2.0(@types/node@22.13.5)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(tsx@4.19.3))
-      '@types/react':
-        specifier: ^19.0.10
-        version: 19.0.10
-      '@types/react-dom':
-        specifier: ^19.0.4
-        version: 19.0.4(@types/react@19.0.10)
       astro:
         specifier: ^5.3.0
         version: 5.3.1(@types/node@22.13.5)(db0@0.2.4)(ioredis@5.5.0)(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.8)(terser@5.39.0)(tsx@4.19.3)(typescript@5.7.3)
@@ -73,7 +69,7 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       tailwindcss:
-        specifier: ^4.0.7
+        specifier: ^4.0.9
         version: 4.0.9
       vite-tsconfig-paths:
         specifier: ^5.1.4
@@ -82,13 +78,19 @@ importers:
       '@types/bun':
         specifier: ^1.2.2
         version: 1.2.4
+      '@types/react':
+        specifier: ^19.0.10
+        version: 19.0.10
+      '@types/react-dom':
+        specifier: ^19.0.4
+        version: 19.0.4(@types/react@19.0.10)
 
   apps/hono-api:
     dependencies:
-      '@repo/db':
+      '@repo_name/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@repo/logger':
+      '@repo_name/logger':
         specifier: workspace:*
         version: link:../../packages/logger
       bun:
@@ -98,77 +100,74 @@ importers:
         specifier: ^4.6.20
         version: 4.7.2
     devDependencies:
-      '@repo/eslint-config':
+      '@repo_name/eslint-config':
         specifier: workspace:*
         version: link:../../packages/config-eslint
-      '@repo/typescript-config':
+      '@repo_name/typescript-config':
         specifier: workspace:*
         version: link:../../packages/config-typescript
       eslint:
         specifier: ^9.20.0
         version: 9.21.0(jiti@2.4.2)
       typescript:
-        specifier: 5.7.3
+        specifier: ^5.7.3
         version: 5.7.3
 
   apps/next:
     dependencies:
-      '@repo/design':
+      '@repo_name/design':
         specifier: workspace:*
         version: link:../../packages/design
-      '@repo/logger':
+      '@repo_name/logger':
         specifier: workspace:*
         version: link:../../packages/logger
-      '@repo/ui':
+      '@repo_name/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@tailwindcss/postcss':
-        specifier: ^4.0.6
+        specifier: ^4.0.9
         version: 4.0.9
       next:
-        specifier: ^15.1.7
+        specifier: ^15.2.0
         version: 15.2.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       postcss:
         specifier: ^8.5.2
         version: 8.5.3
       react:
-        specifier: ^19
+        specifier: ^19.0.0
         version: 19.0.0
       react-dom:
-        specifier: ^19
+        specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       tailwindcss:
-        specifier: ^4.0.6
+        specifier: ^4.0.9
         version: 4.0.9
     devDependencies:
-      '@next/eslint-plugin-next':
-        specifier: ^15.1.6
-        version: 15.2.0
-      '@repo/eslint-config':
+      '@repo_name/eslint-config':
         specifier: workspace:*
         version: link:../../packages/config-eslint
-      '@repo/typescript-config':
+      '@repo_name/typescript-config':
         specifier: workspace:*
         version: link:../../packages/config-typescript
       '@types/node':
         specifier: ^22.12.0
         version: 22.13.5
       '@types/react':
-        specifier: ^19
+        specifier: ^19.0.10
         version: 19.0.10
       '@types/react-dom':
-        specifier: ^19
+        specifier: ^19.0.4
         version: 19.0.4(@types/react@19.0.10)
       eslint:
-        specifier: ^9.19.0
+        specifier: ^9.20.0
         version: 9.21.0(jiti@2.4.2)
       typescript:
-        specifier: 5.7.3
+        specifier: ^5.7.3
         version: 5.7.3
 
   apps/tanstack:
     dependencies:
-      '@repo/design':
+      '@repo_name/design':
         specifier: workspace:*
         version: link:../../packages/design
       '@tanstack/react-router':
@@ -193,16 +192,16 @@ importers:
         specifier: ^0.5.1
         version: 0.5.1
       tailwind-merge:
-        specifier: ^2.6.0
-        version: 2.6.0
+        specifier: ^3.0.1
+        version: 3.0.2
       vinxi:
         specifier: 0.5.3
         version: 0.5.3(@types/node@22.13.5)(db0@0.2.4)(ioredis@5.5.0)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(tsx@4.19.3)(typescript@5.7.3)
     devDependencies:
-      '@repo/eslint-config':
+      '@repo_name/eslint-config':
         specifier: workspace:*
         version: link:../../packages/config-eslint
-      '@repo/typescript-config':
+      '@repo_name/typescript-config':
         specifier: workspace:*
         version: link:../../packages/config-typescript
       '@tailwindcss/postcss':
@@ -215,13 +214,13 @@ importers:
         specifier: ^1.2.2
         version: 1.2.4
       '@types/node':
-        specifier: ^22.5.4
+        specifier: ^22.12.0
         version: 22.13.5
       '@types/react':
-        specifier: ^19.0.0
+        specifier: ^19.0.10
         version: 19.0.10
       '@types/react-dom':
-        specifier: ^19.0.0
+        specifier: ^19.0.4
         version: 19.0.4(@types/react@19.0.10)
       eslint:
         specifier: ^9.20.0
@@ -238,42 +237,42 @@ importers:
 
   apps/vite-admin:
     dependencies:
-      '@repo/design':
+      '@repo_name/design':
         specifier: workspace:*
         version: link:../../packages/design
-      '@repo/ui':
+      '@repo_name/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@tailwindcss/vite':
-        specifier: ^4.0.6
+        specifier: ^4.0.9
         version: 4.0.9(vite@5.4.14(@types/node@22.13.5)(lightningcss@1.29.1)(terser@5.39.0))
       bun:
         specifier: ^1.2.2
         version: 1.2.4
       react:
-        specifier: ^19
+        specifier: ^19.0.0
         version: 19.0.0
       react-dom:
-        specifier: ^19
+        specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       tailwindcss:
-        specifier: ^4.0.6
+        specifier: ^4.0.9
         version: 4.0.9
     devDependencies:
-      '@repo/eslint-config':
+      '@repo_name/eslint-config':
         specifier: workspace:*
         version: link:../../packages/config-eslint
-      '@repo/typescript-config':
+      '@repo_name/typescript-config':
         specifier: workspace:*
         version: link:../../packages/config-typescript
       '@types/bun':
         specifier: ^1.2.2
         version: 1.2.4
       '@types/react':
-        specifier: ^19.0.0
+        specifier: ^19.0.10
         version: 19.0.10
       '@types/react-dom':
-        specifier: ^19.0.0
+        specifier: ^19.0.4
         version: 19.0.4(@types/react@19.0.10)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
@@ -282,7 +281,7 @@ importers:
         specifier: ^9.20.0
         version: 9.21.0(jiti@2.4.2)
       typescript:
-        specifier: 5.7.3
+        specifier: ^5.7.3
         version: 5.7.3
       vite:
         specifier: ^5.4.14
@@ -307,7 +306,7 @@ importers:
         specifier: ^15.1.6
         version: 15.2.0
       eslint:
-        specifier: ^9.19.0
+        specifier: ^9.20.0
         version: 9.21.0(jiti@2.4.2)
       eslint-config-prettier:
         specifier: ^10.0.1
@@ -342,10 +341,10 @@ importers:
         specifier: ^1.2.2
         version: 1.2.4
     devDependencies:
-      '@repo/eslint-config':
+      '@repo_name/eslint-config':
         specifier: workspace:*
         version: link:../config-eslint
-      '@repo/typescript-config':
+      '@repo_name/typescript-config':
         specifier: workspace:*
         version: link:../config-typescript
       '@types/bun':
@@ -355,13 +354,13 @@ importers:
         specifier: ^9.20.0
         version: 9.21.0(jiti@2.4.2)
       typescript:
-        specifier: 5.7.3
+        specifier: ^5.7.3
         version: 5.7.3
 
   packages/design:
     dependencies:
       '@tailwindcss/postcss':
-        specifier: ^4.0.6
+        specifier: ^4.0.9
         version: 4.0.9
       postcss:
         specifier: ^8.5.2
@@ -370,7 +369,7 @@ importers:
         specifier: ^3.0.1
         version: 3.0.2
       tailwindcss:
-        specifier: ^4.0.6
+        specifier: ^4.0.9
         version: 4.0.9
       tailwindcss-animate:
         specifier: ^1.0.7
@@ -382,10 +381,10 @@ importers:
         specifier: ^5.4.1
         version: 5.4.1
     devDependencies:
-      '@repo/eslint-config':
+      '@repo_name/eslint-config':
         specifier: workspace:*
         version: link:../config-eslint
-      '@repo/typescript-config':
+      '@repo_name/typescript-config':
         specifier: workspace:*
         version: link:../config-typescript
       '@types/node':
@@ -398,7 +397,7 @@ importers:
         specifier: ^8.0.1
         version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.3)(typescript@5.7.3)
       typescript:
-        specifier: 5.7.3
+        specifier: ^5.7.3
         version: 5.7.3
 
   packages/ui:
@@ -406,7 +405,7 @@ importers:
       '@radix-ui/react-select':
         specifier: ^2.1.6
         version: 2.1.6(@types/react-dom@19.0.4(@types/react@19.0.10))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@repo/design':
+      '@repo_name/design':
         specifier: workspace:*
         version: link:../design
       '@types/react':
@@ -434,10 +433,10 @@ importers:
         specifier: ^3.0.1
         version: 3.0.2
     devDependencies:
-      '@repo/eslint-config':
+      '@repo_name/eslint-config':
         specifier: workspace:*
         version: link:../config-eslint
-      '@repo/typescript-config':
+      '@repo_name/typescript-config':
         specifier: workspace:*
         version: link:../config-typescript
       '@types/node':
@@ -447,7 +446,7 @@ importers:
         specifier: ^9.20.0
         version: 9.21.0(jiti@2.4.2)
       typescript:
-        specifier: 5.7.3
+        specifier: ^5.7.3
         version: 5.7.3
 
 packages:
@@ -1623,6 +1622,10 @@ packages:
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
+
+  '@pkgr/core@0.1.1':
+    resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
+    engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
   '@radix-ui/number@1.1.0':
     resolution: {integrity: sha512-V3gRzhVNU1ldS5XhAPTom1fOIo4ccrjjJgmE+LI2h/WaFpHmx0MQApT+KZHnx8abG6Avtfcz4WoEciMnpFT3HQ==}
@@ -2981,6 +2984,10 @@ packages:
     resolution: {integrity: sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==}
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
 
+  detect-indent@7.0.1:
+    resolution: {integrity: sha512-Mc7QhQ8s+cLrnUfU/Ji94vG/r8M26m8f++vyres4ZoojaRDpZ1eSIh/EpzLNwlWuvzSZ3UbDFspjFvTDXe6e/g==}
+    engines: {node: '>=12.20'}
+
   detect-libc@1.0.3:
     resolution: {integrity: sha512-pGjwhsmsp4kL2RTz08wcOlGN83otlqHeD/Z5T8GXZB+/YcpQ/dgo+lbU8ZsGxV0HIvqqxo9l7mqYwyYMD9bKDg==}
     engines: {node: '>=0.10'}
@@ -2989,6 +2996,10 @@ packages:
   detect-libc@2.0.3:
     resolution: {integrity: sha512-bwy0MGW55bG41VqxxypOsdSdGqLwXPI/focwgTYCFMbdUiBAxLg9CFzG08sz2aqzknwiX7Hkl0bQENjg8iLByw==}
     engines: {node: '>=8'}
+
+  detect-newline@4.0.1:
+    resolution: {integrity: sha512-qE3Veg1YXzGHQhlA6jzebZN2qVf6NX+A7m7qlhCGG30dJixrAQhYOsJjsnBjJkCSmuOPpCk30145fr8FV0bzog==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
   detect-node-es@1.1.0:
     resolution: {integrity: sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==}
@@ -3450,6 +3461,10 @@ packages:
     resolution: {integrity: sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==}
     engines: {node: '>= 0.4'}
 
+  get-stdin@9.0.0:
+    resolution: {integrity: sha512-dVKBjfWisLAicarI2Sf+JuBE/DghV4UzNAVe9yhEJuzeREd3JhOTE9cUaJTeSa77fsbQUK3pcOpJfM59+VKZaA==}
+    engines: {node: '>=12'}
+
   get-stream@8.0.1:
     resolution: {integrity: sha512-VaUJspBffn/LMCJVoMvSAdmscJyS1auj5Zulnn5UoYcY531UWmdwhRWkcGKnGU93m5HSXP9LP2usOryrBtQowA==}
     engines: {node: '>=16'}
@@ -3464,6 +3479,9 @@ packages:
   giget@1.2.5:
     resolution: {integrity: sha512-r1ekGw/Bgpi3HLV3h1MRBIlSAdHoIMklpaQ3OQLFcRw9PwAj2rqigvIbg+dBUI51OxVI2jsEtDywDBjSiuf7Ug==}
     hasBin: true
+
+  git-hooks-list@3.2.0:
+    resolution: {integrity: sha512-ZHG9a1gEhUMX1TvGrLdyWb9kDopCBbTnI8z4JgRMYxsijWipgjSEYoPWqBuIB0DnRnvqlQSEeVmzpeuPm7NdFQ==}
 
   github-slugger@2.0.0:
     resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
@@ -4659,6 +4677,14 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
+  prettier-plugin-packagejson@2.5.8:
+    resolution: {integrity: sha512-BaGOF63I0IJZoudxpuQe17naV93BRtK8b3byWktkJReKEMX9CC4qdGUzThPDVO/AUhPzlqDiAXbp18U6X8wLKA==}
+    peerDependencies:
+      prettier: '>= 1.16.0'
+    peerDependenciesMeta:
+      prettier:
+        optional: true
+
   prettier-plugin-tailwindcss@0.6.11:
     resolution: {integrity: sha512-YxaYSIvZPAqhrrEpRtonnrXdghZg1irNg4qrjboCXrpybLWVs55cW2N3juhspVJiO0JBvYJT8SYsJpc8OQSnsA==}
     engines: {node: '>=14.21.3'}
@@ -5073,6 +5099,13 @@ packages:
     resolution: {integrity: sha512-tEYNll18pPKHroYSmLLrksq233j021G0giwW7P3D24jC54pQ5W5BXMsQ/Mvw1OJCmEYDgY+lrzT+3nNUtoNfXQ==}
     engines: {node: '>= 18'}
 
+  sort-object-keys@1.1.3:
+    resolution: {integrity: sha512-855pvK+VkU7PaKYPc+Jjnmt4EzejQHyhhF33q31qG8x7maDzkeFhAAThdCYay11CISO+qAMwjOBP+fPZe0IPyg==}
+
+  sort-package-json@2.14.0:
+    resolution: {integrity: sha512-xBRdmMjFB/KW3l51mP31dhlaiFmqkHLfWTfZAno8prb/wbDxwBPWFpxB16GZbiPbYr3wL41H8Kx22QIDWRe8WQ==}
+    hasBin: true
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -5217,12 +5250,13 @@ packages:
       svelte:
         optional: true
 
+  synckit@0.9.2:
+    resolution: {integrity: sha512-vrozgXDQwYO72vHjUb/HnFbQx1exDjoKzqx23aXEg2a9VIg2TSFZ8FmeZpTjUCFMYw7mpX4BE2SFu8wI7asYsw==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+
   system-architecture@0.1.0:
     resolution: {integrity: sha512-ulAk51I9UVUyJgxlv9M6lFot2WP3e7t8Kz9+IS6D4rVba1tR9kON+Ey69f+1R4Q8cd45Lod6a4IcJIxnzGc/zA==}
     engines: {node: '>=18'}
-
-  tailwind-merge@2.6.0:
-    resolution: {integrity: sha512-P+Vu1qXfzediirmHOC3xKGAYeZtPcV9g76X+xg2FD4tYgR71ewMA35Y3sCz3zhiN/dwefRpJX0yBcgwi1fXNQA==}
 
   tailwind-merge@3.0.2:
     resolution: {integrity: sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==}
@@ -6771,6 +6805,8 @@ snapshots:
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
+
+  '@pkgr/core@0.1.1': {}
 
   '@radix-ui/number@1.1.0': {}
 
@@ -8810,9 +8846,13 @@ snapshots:
 
   destroy@1.2.0: {}
 
+  detect-indent@7.0.1: {}
+
   detect-libc@1.0.3: {}
 
   detect-libc@2.0.3: {}
+
+  detect-newline@4.0.1: {}
 
   detect-node-es@1.1.0: {}
 
@@ -9434,6 +9474,8 @@ snapshots:
       dunder-proto: 1.0.1
       es-object-atoms: 1.1.1
 
+  get-stdin@9.0.0: {}
+
   get-stream@8.0.1: {}
 
   get-symbol-description@1.1.0:
@@ -9455,6 +9497,8 @@ snapshots:
       nypm: 0.5.4
       pathe: 2.0.3
       tar: 6.2.1
+
+  git-hooks-list@3.2.0: {}
 
   github-slugger@2.0.0: {}
 
@@ -10931,6 +10975,13 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
+  prettier-plugin-packagejson@2.5.8(prettier@3.5.2):
+    dependencies:
+      sort-package-json: 2.14.0
+      synckit: 0.9.2
+    optionalDependencies:
+      prettier: 3.5.2
+
   prettier-plugin-tailwindcss@0.6.11(@ianvs/prettier-plugin-sort-imports@4.4.1(prettier@3.5.2))(prettier@3.5.2):
     dependencies:
       prettier: 3.5.2
@@ -11420,6 +11471,19 @@ snapshots:
 
   smol-toml@1.3.1: {}
 
+  sort-object-keys@1.1.3: {}
+
+  sort-package-json@2.14.0:
+    dependencies:
+      detect-indent: 7.0.1
+      detect-newline: 4.0.1
+      get-stdin: 9.0.0
+      git-hooks-list: 3.2.0
+      is-plain-obj: 4.1.0
+      semver: 7.7.1
+      sort-object-keys: 1.1.3
+      tinyglobby: 0.2.12
+
   source-map-js@1.2.1: {}
 
   source-map-support@0.5.21:
@@ -11578,9 +11642,12 @@ snapshots:
       postcss: 8.5.3
       postcss-scss: 4.0.9(postcss@8.5.3)
 
-  system-architecture@0.1.0: {}
+  synckit@0.9.2:
+    dependencies:
+      '@pkgr/core': 0.1.1
+      tslib: 2.8.1
 
-  tailwind-merge@2.6.0: {}
+  system-architecture@0.1.0: {}
 
   tailwind-merge@3.0.2: {}
 

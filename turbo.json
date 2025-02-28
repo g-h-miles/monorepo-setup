@@ -1,7 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalEnv": ["PG_URL", "TANSTACK_PROD_URL"],
-  "globalDependencies": ["PROD"],
+  "globalDependencies": [".env"],
   "ui": "tui",
   "tasks": {
     "build": {
@@ -29,6 +29,9 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "format": {
+      "dependsOn": ["^format"]
     }
   }
 }

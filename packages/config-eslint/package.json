@@ -1,8 +1,8 @@
 {
-  "name": "@repo/eslint-config",
+  "name": "@repo_name/eslint-config",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
+  "type": "module",
   "exports": {
     ".": "./index.js",
     "./next": "./next.js",
@@ -11,10 +11,14 @@
     "./vite": "./vite.js",
     "./svelte": "./svelte.js"
   },
+  "dependencies": {
+    "eslint-plugin-boundaries": "^5.0.1",
+    "eslint-plugin-svelte": "^2.46.1"
+  },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
     "@next/eslint-plugin-next": "^15.1.6",
-    "eslint": "^9.19.0",
+    "eslint": "^9.20.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-react": "^7.37.4",
@@ -23,9 +27,5 @@
     "globals": "^15.14.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.22.0"
-  },
-  "dependencies": {
-    "eslint-plugin-boundaries": "^5.0.1",
-    "eslint-plugin-svelte": "^2.46.1"
   }
 }

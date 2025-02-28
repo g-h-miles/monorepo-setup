@@ -1,34 +1,33 @@
 {
   "name": "next",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "next build",
+    "check-types": "tsc --noEmit",
     "dev": "bun --bun run next dev -p 3002",
     "lint": "next lint",
-    "check-types": "tsc --noEmit",
     "start": "bun --bun run next start"
   },
   "dependencies": {
-    "@repo/design": "workspace:*",
-    "@repo/logger": "workspace:*",
-    "@repo/ui": "workspace:*",
-    "@tailwindcss/postcss": "^4.0.6",
-    "next": "^15.1.7",
+    "@repo_name/design": "workspace:*",
+    "@repo_name/logger": "workspace:*",
+    "@repo_name/ui": "workspace:*",
+    "@tailwindcss/postcss": "^4.0.9",
+    "next": "^15.2.0",
     "postcss": "^8.5.2",
-    "react": "^19",
-    "react-dom": "^19",
-    "tailwindcss": "^4.0.6"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.9"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^15.1.6",
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@repo_name/eslint-config": "workspace:*",
+    "@repo_name/typescript-config": "workspace:*",
     "@types/node": "^22.12.0",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9.19.0",
-    "typescript": "5.7.3"
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "eslint": "^9.20.0",
+    "typescript": "^5.7.3"
   }
 }

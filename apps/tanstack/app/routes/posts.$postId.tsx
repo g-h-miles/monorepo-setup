@@ -1,7 +1,8 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
-import { fetchPost } from '../utils/posts'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { NotFound } from '~/components/NotFound'
 import { PostErrorComponent } from '~/components/PostError'
+
+import { fetchPost } from '../utils/posts'
 
 export const Route = createFileRoute('/posts/$postId')({
   loader: ({ params: { postId } }) => fetchPost({ data: postId }),

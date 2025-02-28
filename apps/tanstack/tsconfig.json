@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/vite.json",
+  "extends": "@repo_name/typescript-config/vite.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "baseUrl": ".",
