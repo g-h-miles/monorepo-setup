@@ -9,17 +9,9 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "@ui/*": [
-        "./src/*"
-      ]
+      "@ui/*": ["./src/*"]
     }
   },
-  "include": [
-    "."
-  ],
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules"
-  ]
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"]
 }

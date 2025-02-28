@@ -1,19 +1,10 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
-    "lib": [
-      "ES2021"
-    ],
+    "lib": ["ES2021"],
     "outDir": "./dist",
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": [
-    "."
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
 }
