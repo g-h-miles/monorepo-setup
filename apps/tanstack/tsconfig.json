@@ -1,10 +1,15 @@
 {
-  "extends": "@repo_name/typescript-config/vite.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "extends": "@repo/typescript-config/vite.json",
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": [
+        "./app/*"
+      ]
     }
   }
 }

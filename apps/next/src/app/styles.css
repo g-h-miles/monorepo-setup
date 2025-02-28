@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import '@repo_name/design/globals';
+@import '@repo/design/globals';
 @source "../app";
 
 

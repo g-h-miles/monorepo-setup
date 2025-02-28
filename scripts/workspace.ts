@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import { glob } from 'glob'
 
 const WORKSPACE_SETTINGS = {
-  repo_name: '@repo_name', // CHANGE BY RUNNING PACKAGE.JSON SCRIPT
+  repo_name: '@repo', // CHANGE BY RUNNING PACKAGE.JSON SCRIPT
   preferred_runtime: 'bun',
 }
 
@@ -159,7 +159,7 @@ export function renameWorkspacePackages(newPrefix: string): void {
   }
 
   // Step 5: Update imports in source files and configs
-  const sourceFiles = glob.sync('**/*.{ts,tsx,css,json,js,mjs,cjs,md}', {
+  const sourceFiles = glob.sync('**/*.{ts,tsx,css,json,js,mjs,cjs,md,astro}', {
     ignore: [
       '**/node_modules/**',
       '**/dist/**',
@@ -189,7 +189,7 @@ export function renameWorkspacePackages(newPrefix: string): void {
           `${newPrefix}/$1`
         )
       } else {
-        // JS/TS files - handle imports and requires
+        // JS/TS/Astro files - handle imports and requires
         const importRegex = new RegExp(`['"]${oldPrefix}/([^'"]+)['"]`, 'g')
         newContent = content.replace(importRegex, `'${newPrefix}/$1'`)
       }

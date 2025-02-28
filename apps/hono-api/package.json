@@ -11,15 +11,15 @@
     "start": "bun run dist/index.js"
   },
   "dependencies": {
-    "@repo_name/db": "workspace:*",
-    "@repo_name/logger": "workspace:*",
     "bun": "^1.2.2",
-    "hono": "^4.6.20"
+    "hono": "^4.6.20",
+    "@repo/db": "workspace:*",
+    "@repo/logger": "workspace:*"
   },
   "devDependencies": {
-    "@repo_name/eslint-config": "workspace:*",
-    "@repo_name/typescript-config": "workspace:*",
     "eslint": "^9.20.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*"
   }
 }

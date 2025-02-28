@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import '@repo_name/design/globals';
+@import '@repo/design/globals';
 html {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
