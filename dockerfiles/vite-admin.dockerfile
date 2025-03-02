@@ -32,29 +32,14 @@ RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm install --frozen-lockfi
 # Copy source code of isolated subworkspace
 COPY --from=pruner /app/out/full/ .
 
-# Add debug before build
-RUN echo "Contents before build:" && ls -la apps/vite-admin/
-RUN echo "\nturbo.json contents:" && cat turbo.json
+
 
 # Build the app
 WORKDIR /app
-RUN echo "=== BEFORE BUILD ===" && \
-    pwd && \
-    ls -la && \
-    ls -la apps/vite-admin/
+
 
 RUN pnpm --filter ${PROJECT} build
 
-RUN echo "=== AFTER BUILD ===" && \
-    pwd && \
-    ls -la && \
-    ls -la apps/vite-admin/ && \
-    echo "=== DIST CONTENTS ===" && \
-    find /app -name "dist" -type d -exec sh -c 'echo "\nContents of {}:" && ls -la {}' \;
-
-# Debug: List all dist directories
-RUN find /app -name "dist" -type d
-RUN ls -la /app/apps/vite-admin/
 
 # Return to app root
 WORKDIR /app
