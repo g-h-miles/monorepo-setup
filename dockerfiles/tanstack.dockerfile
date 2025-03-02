@@ -32,15 +32,15 @@ RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm install
 # Copy source code of isolated subworkspace
 COPY --from=pruner /app/out/full/ .
 
-
+RUN echo "Contents before build:" && ls -la apps/tanstack/
+RUN echo "\nturbo.json contents:" && cat turbo.json
 
 # Build the app
 WORKDIR /app
 
-
 RUN pnpm --filter ${PROJECT} build
-# RUN pnpm deploy --filter tanstack --prod /app/.prod_modules
-
+RUN echo "Contents after build:" && ls -la apps/tanstack/
+RUN tree apps/tanstack/
 
 # Return to app root
 WORKDIR /app

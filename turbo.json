@@ -7,14 +7,7 @@
     "build": {
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "dependsOn": ["^build"],
-      "outputs": [
-        "build/**",
-        ".vercel/**",
-        "dist/**",
-        ".next/**",
-        "!.next/cache/**",
-        ".output/**"
-      ]
+      "outputs": []
     },
     "test": {
       "outputs": ["coverage/**"],
