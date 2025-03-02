@@ -13,7 +13,7 @@ serve({
       const file = Bun.file(join(distPath, path))
       return new Response(file)
     } catch (e) {
-      return new Response('Not Found', { status: 404 })
+      return new Response('Not Found - ' + e, { status: 404 })
     }
   },
 })

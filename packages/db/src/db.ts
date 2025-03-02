@@ -1,8 +1,10 @@
 // Use a dynamic import approach for Bun's SQL
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let sql: any
 
 try {
   // Try to import Bun's SQL module
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { SQL } = require('bun')
 
   console.log('Initializing database connection with Bun SQL...')
@@ -15,6 +17,7 @@ try {
   sql.options.onclose = () => {
     console.log('Connection closed')
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 } catch (error) {
   console.log('Bun SQL not available, using mock implementation')
   // Provide a mock implementation for build environments

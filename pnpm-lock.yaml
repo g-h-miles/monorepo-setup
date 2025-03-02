@@ -14,6 +14,9 @@ importers:
       '@types/glob':
         specifier: ^8.1.0
         version: 8.1.0
+      bun:
+        specifier: ^1.2.4
+        version: 1.2.4
       eslint:
         specifier: ^9.20.0
         version: 9.21.0(jiti@2.4.2)
@@ -238,7 +241,7 @@ importers:
         specifier: ^4.0.9
         version: 4.0.9(vite@5.4.14(@types/node@22.13.5)(lightningcss@1.29.1)(terser@5.39.0))
       bun:
-        specifier: ^1.2.2
+        specifier: ^1.2.4
         version: 1.2.4
       react:
         specifier: ^19.0.0
@@ -327,10 +330,6 @@ importers:
   packages/config-typescript: {}
 
   packages/db:
-    dependencies:
-      bun:
-        specifier: ^1.2.2
-        version: 1.2.4
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -2645,6 +2644,7 @@ packages:
 
   bun@1.2.4:
     resolution: {integrity: sha512-ZY0EZ/UKqheaLeAtMsfJA6jWoWvV9HAtfFaOJSmS3LrNpFKs1Sg5fZLSsczN1h3a+Dtheo4O3p3ZYWrf40kRGw==}
+    cpu: [arm64, x64, aarch64]
     os: [darwin, linux, win32]
     hasBin: true
 

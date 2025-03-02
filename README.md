@@ -1,40 +1,136 @@
-# Turborepo kitchen sink starter
+# Modern Monorepo Boilerplate
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern, high-performance monorepo setup using Turborepo, pnpm, and Bun.
 
-This example also shows how to use [Workspace Configurations](https://turbo.build/repo/docs/core-concepts/monorepos/configuring-workspaces).
+## 🚀 Features
 
-## Using this example
+- **Package Manager**: [pnpm](https://pnpm.io/) for fast, disk-space efficient package management
+- **Build System**: [Turborepo](https://turbo.build/) for optimized build pipelines
+- **Runtime**: [Bun](https://bun.sh/) for blazing fast JavaScript runtime and tooling
+  - All apps and packages are configured to use Bun as the default runtime
+  - Leverages Bun's built-in bundler, test runner, and package manager capabilities
+- **Type Safety**: Full TypeScript support across all packages
+- **Code Quality**: ESLint and Prettier configuration with import sorting
+- **Docker Support**: Ready-to-use Docker configuration
+  - Production-ready Dockerfiles for each application
+  - Optimized for [Coolify](https://coolify.io/) deployment
+  - Multi-stage builds with best practices
 
-Run the following command:
+## 📦 Prerequisites
 
-```sh
-npx create-turbo@latest -e kitchen-sink
+- Node.js (LTS version recommended)
+- pnpm 10.5.2 or higher
+- Bun 1.2.2 or higher
+
+## 🛠️ Getting Started
+
+1. **Clone the repository**
+
+```bash
+git clone <your-repo-url>
+cd <repo-name>
 ```
 
-## What's inside?
+2. **Install dependencies**
 
-This Turborepo includes the following packages and apps:
+```bash
+pnpm install
+```
 
-### Apps and Packages
+3. **Start development**
 
-- `api`: an [Express](https://expressjs.com/) server
-- `storefront`: a [Next.js](https://nextjs.org/) app
-- `admin`: a [Vite](https://vitejs.dev/) single page app
-- `blog`: a [Remix](https://remix.run/) blog
-- `@repo/eslint-config`: ESLint configurations used throughout the monorepo
-- `@repo/jest-presets`: Jest configurations
-- `@repo/logger`: isomorphic logger (a small wrapper around console.log)
-- `@repo/ui`: a dummy React UI library (which contains `<CounterButton>` and `<Link>` components)
-- `@repo/typescript-config`: tsconfig.json's used throughout the monorepo
+```bash
+pnpm dev
+```
 
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
+## 📚 Available Scripts
 
-### Utilities
+- `pnpm build` - Build all packages
+- `pnpm dev` - Start development mode
+- `pnpm lint` - Lint all packages
+- `pnpm test` - Run tests
+- `pnpm clean` - Clean build artifacts
+- `pnpm format` - Format code with Prettier
+- `pnpm check` - Run sherif checks
+- `pnpm docker:build` - Build Docker containers
+- `pnpm docker:up` - Start Docker environment
+- `pnpm @up` - Update dependencies recursively
 
-This Turborepo has some additional tools already setup for you:
+## 🏗️ Project Structure
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Jest](https://jestjs.io) test runner for all things JavaScript
-- [Prettier](https://prettier.io) for code formatting
+```
+.
+├── apps/                    # Application packages
+│   ├── vite-admin/         # Vite-powered admin dashboard
+│   ├── astro/             # Astro.js application
+│   ├── hono-api/          # Hono-based API
+│   ├── next/              # Next.js application
+│   └── tanstack/          # TanStack application
+├── packages/               # Shared packages
+│   ├── ui/                # Shared UI components
+│   ├── config-eslint/     # ESLint configurations
+│   ├── db/                # Database utilities
+│   ├── design/            # Design system
+│   ├── logger/            # Logging utilities
+│   └── config-typescript/ # TypeScript configurations
+├── dockerfiles/           # Docker configuration files
+├── docker-compose.yml     # Docker compose configuration
+├── turbo.json            # Turborepo configuration
+└── package.json          # Root package.json
+```
+
+## 🔧 Development Tools
+
+- **TypeScript**: Version 5.7.3
+- **ESLint**: Version 9.20.0
+- **Prettier**: Version 3.5.2
+  - With plugins for import sorting, package.json formatting, and Tailwind CSS
+
+## 🐳 Docker Support
+
+The project includes Docker support for containerized development and deployment, with pre-configured Dockerfiles optimized for [Coolify](https://coolify.io/) deployment:
+
+```bash
+# Build Docker containers
+pnpm docker:build
+
+# Start Docker environment
+pnpm docker:up
+```
+
+### 🚀 Coolify Deployment
+
+Each application in the `apps` directory includes a production-ready Dockerfile configured for seamless deployment to Coolify:
+
+- Optimized multi-stage builds
+- Built-in health checks
+- Environment variable handling
+- Automatic port configuration
+- Volume persistence setup
+- Resource optimization
+
+To deploy to Coolify:
+
+1. Connect your Git repository to Coolify
+2. Select the application directory (e.g., `apps/next` or `apps/hono-api`)
+3. The pre-configured Dockerfile will be automatically detected
+4. Configure your environment variables
+5. Deploy!
+
+## 📝 Code Style
+
+This project uses Prettier with the following plugins:
+
+- `@ianvs/prettier-plugin-sort-imports`
+- `prettier-plugin-packagejson`
+- `prettier-plugin-tailwindcss`
+
+## 🤝 Contributing
+
+1. Create a new branch
+2. Make your changes
+3. Submit a pull request
+
+## 📄 License
+
+[MIT](LICENSE)

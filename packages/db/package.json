@@ -12,9 +12,6 @@
     "check-types": "tsc --noEmit",
     "lint": "eslint src/"
   },
-  "dependencies": {
-    "bun": "^1.2.2"
-  },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
