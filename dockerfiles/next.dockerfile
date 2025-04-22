@@ -1,5 +1,5 @@
 # Base image with Bun - use platform-specific image
-FROM --platform=${BUILDPLATFORM:-linux/amd64} oven/bun:canary-alpine AS alpine
+FROM --platform=${BUILDPLATFORM:-linux/amd64} oven/bun:1.2-alpine AS alpine
 RUN apk update
 RUN apk add --no-cache libc6-compat tree nodejs npm
 
@@ -39,7 +39,7 @@ RUN rm -rf ./**/*/src
 
 
 # Final image - use platform-specific image
-FROM --platform=${TARGETPLATFORM:-linux/amd64} oven/bun:canary-alpine AS runner
+FROM --platform=${TARGETPLATFORM:-linux/amd64} oven/bun:1.2-alpine AS runner
 ARG PROJECT=next
 
 RUN addgroup --system --gid 1001 nodejs
