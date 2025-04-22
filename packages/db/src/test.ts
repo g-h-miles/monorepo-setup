@@ -5,3 +5,5 @@ export const test_result = async () => {
   console.log(result)
   return result
 }
+
+test_result()
