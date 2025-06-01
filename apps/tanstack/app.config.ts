@@ -15,16 +15,31 @@ export default defineConfig({
       'process.env': JSON.stringify(process.env),
     },
     optimizeDeps: {
-      exclude: ['@tanstack/react-start-server'],
+      exclude: [
+        '@tanstack/react-start-server',
+        '@tanstack/react-start-server/dist/esm/transformStreamWithRouter.js',
+      ],
     },
     ssr: {
       noExternal: ['@tanstack/react-start-server'],
+      external: ['node:stream', 'node:stream/web', 'node:fs', 'node:path', 'node:async_hooks'],
     },
-    resolve: {
-      alias: {
-        'node:stream': 'stream',
-        'node:stream/web': 'stream/web',
+    build: {
+      rollupOptions: {
+        external: [
+          'node:stream',
+          'node:stream/web',
+          'node:fs',
+          'node:path',
+          'node:async_hooks',
+        ],
       },
+    },
+  },
+  server: {
+    preset: 'bun',
+    experimental: {
+      asyncContext: true,
     },
   },
 })
