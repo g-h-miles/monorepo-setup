@@ -59,17 +59,19 @@ services:
     volumes:
       - /data/coolify/ssl/coolify-ca.crt:/etc/ssl/certs/coolify-ca.crt:ro
   tanstack:
-    image: tanstack-docker-test-2
+    image: hono-api-docker-test-2
     build:
       context: .
-      dockerfile: dockerfiles/tanstack.dockerfile
+      dockerfile: dockerfiles/hono-api.dockerfile
       args:
+        - PORT=3004
         - BUILDPLATFORM=${BUILDPLATFORM:-linux/amd64}
         - TARGETPLATFORM=${TARGETPLATFORM:-linux/amd64}
     platform: ${TARGETPLATFORM:-linux/amd64}
     ports:
-      - '3004:3004'
+      - '3003:3004'
     environment:
+      - PORT=3004
       - NODE_ENV=production
-      - SERVER_PRESET=bun
-    restart: always
+    volumes:
+      - /data/coolify/ssl/coolify-ca.crt:/etc/ssl/certs/coolify-ca.crt:ro
