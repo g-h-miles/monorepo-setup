@@ -14,5 +14,17 @@ export default defineConfig({
       process: {},
       'process.env': JSON.stringify(process.env),
     },
+    optimizeDeps: {
+      exclude: ['@tanstack/react-start-server'],
+    },
+    ssr: {
+      noExternal: ['@tanstack/react-start-server'],
+    },
+    resolve: {
+      alias: {
+        'node:stream': 'stream',
+        'node:stream/web': 'stream/web',
+      },
+    },
   },
 })
