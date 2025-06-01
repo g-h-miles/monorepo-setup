@@ -12,6 +12,7 @@ export default defineConfig({
     ],
     define: {
       process: {},
+      'process.env': JSON.stringify(process.env),
     },
   },
 })
