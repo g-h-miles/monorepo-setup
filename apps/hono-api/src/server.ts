@@ -9,6 +9,9 @@ export const createServer = (): Hono => {
   app
     .use('*', logger())
     .use('*', cors())
+    .get('/', (c) => {
+      return c.json({ message: 'Hello World' })
+    })
     .get('/message/:name', (c) => {
       const name = c.req.param('name')
       return c.json({ message: `hello ${name}` })
